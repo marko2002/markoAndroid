@@ -4,4 +4,17 @@
     <string name="password">Password</string>
     <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="email">Email</string>
+    <string name="gender">gender</string>
+    <string-array name="spinner">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="checkBox">Accept Notifications</string>
+    <string name="myFriend">My Friend</string>
+    <string name="logOut">LOG OUT</string>
+    <string name="Send">SEND</string>
+    <string name="messageText">message text</string>
 </resources>

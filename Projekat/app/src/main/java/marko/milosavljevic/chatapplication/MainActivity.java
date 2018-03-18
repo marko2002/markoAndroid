@@ -1,5 +1,6 @@
 package marko.milosavljevic.chatapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         password = findViewById(R.id.editText2);
 
         login = findViewById(R.id.loginID);
+        login.setOnClickListener(this);
         register = findViewById(R.id.registerID);
+        register.setOnClickListener(this);
 
 
 
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+
             }
 
             @Override
@@ -99,6 +103,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+
+        if(view.getId()==R.id.registerID){
+
+            Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
+            startActivity(intent);
+
+        }
+            if(view.getId()==R.id.loginID){
+
+            Intent intent1 = new Intent(MainActivity.this,ContactsActivity.class);
+            startActivity(intent1);
+
+        }
 
     }
 }

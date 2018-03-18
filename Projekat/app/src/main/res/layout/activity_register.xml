@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="marko.milosavljevic.chatapplication.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/usernameRegID"
+            android:hint="@string/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="8"/>
+        <EditText
+            android:id="@+id/firstNameID"
+            android:hint="@string/FirstName"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="8"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/passwordRegID"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="8"/>
+        <EditText
+            android:id="@+id/lastNameID"
+            android:hint="@string/LastName"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="8"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/emailRegID"
+            android:hint="@string/email"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"/>
+
+        <TextView
+            android:id="@+id/genderID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="@string/gender"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:entries="@array/spinner">
+        </Spinner>
+
+
+    </LinearLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:hint="@string/checkBox"
+
+        />
+
+    <DatePicker
+        android:id="@+id/datePickerID"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="1dp"
+        android:layout_height="wrap_content"
+        android:datePickerMode="spinner"
+        android:spinnersShown="false"
+        android:headerBackground="@color/colorPrimaryDark"
+
+        >
+    </DatePicker>
+
+    <Button
+        android:id="@+id/registerActvButtonID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/register"
+        android:enabled="false"
+
+        />
+
+</LinearLayout>
