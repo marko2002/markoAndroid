@@ -80,17 +80,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 String text = password.getText().toString();
 
-                if(text.length()>=6){
+                if(text.length()>=6) {
 
-                    passwordEnt=true;
-                    if(usernameEnt==true){
+                    passwordEnt = true;
+                    if (usernameEnt == true) {
                         login.setEnabled(true);
-                    }else{
+                    }
+                }else{
 
                         passwordEnt=false;
                         login.setEnabled(false);
-
-                    }
 
                 }
 
