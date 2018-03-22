@@ -18,4 +18,5 @@
     <string name="Send">SEND</string>
     <string name="messageText">message text</string>
     <string name="messageSent">message sent</string>
+    <string name="birthDate">Birth date:</string>
 </resources>

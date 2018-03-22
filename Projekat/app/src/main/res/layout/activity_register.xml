@@ -13,19 +13,20 @@
 
         <EditText
             android:id="@+id/usernameRegID"
-            android:hint="@string/username"
             android:layout_width="wrap_content"
-            android:singleLine="true"
             android:layout_height="wrap_content"
-            android:ems="8"/>
+            android:ems="8"
+            android:hint="@string/username"
+            android:singleLine="true" />
+
         <EditText
             android:id="@+id/firstNameID"
-            android:hint="@string/FirstName"
-            android:layout_marginLeft="30dp"
-            android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="8"/>
+            android:layout_marginLeft="30dp"
+            android:ems="8"
+            android:hint="@string/FirstName"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -36,22 +37,21 @@
 
         <EditText
             android:id="@+id/passwordRegID"
-            android:inputType="textPassword"
-            android:hint="@string/password"
-            android:layout_marginTop="10dp"
-            android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="8"/>
+            android:ems="8"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
         <EditText
             android:id="@+id/lastNameID"
-            android:hint="@string/LastName"
-            android:singleLine="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="8"/>
+            android:layout_marginLeft="30dp"
+            android:ems="8"
+            android:hint="@string/LastName"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -61,28 +61,24 @@
 
         <EditText
             android:id="@+id/emailRegID"
-            android:hint="@string/email"
-            android:singleLine="true"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"/>
+            android:ems="10"
+            android:hint="@string/email"
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/genderID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:text="@string/gender"/>
+            android:text="@string/gender" />
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:entries="@array/spinner">
-        </Spinner>
+            android:entries="@array/spinner"></Spinner>
 
 
     </LinearLayout>
@@ -90,31 +86,35 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:hint="@string/checkBox"
 
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/birthDate"
+        android:textSize="13dp" />
+
     <DatePicker
         android:id="@+id/datePickerID"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="1dp"
-        android:layout_height="wrap_content"
         android:datePickerMode="spinner"
-        android:spinnersShown="false"
         android:headerBackground="@color/colorPrimaryDark"
+        android:spinnersShown="false"
 
-        >
-    </DatePicker>
+        ></DatePicker>
 
     <Button
         android:id="@+id/registerActvButtonID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/register"
         android:enabled="false"
+        android:text="@string/register"
 
         />
 

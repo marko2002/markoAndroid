@@ -15,9 +15,8 @@
             android:id="@+id/messageActvLogOutBtnID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/logOut"
             android:layout_marginLeft="270dp"
-            />
+            android:text="@string/logOut" />
 
     </LinearLayout>
 
@@ -32,24 +31,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="400dp"
             android:ems="12"
-            android:hint="@string/messageText"
-            />
+            android:hint="@string/messageText" />
+
         <Button
             android:id="@+id/sendBtnID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="400dp"
             android:layout_marginLeft="20dp"
-            android:text="@string/Send"
+            android:layout_marginTop="400dp"
             android:enabled="false"
+            android:text="@string/Send"
 
             />
 
 
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>

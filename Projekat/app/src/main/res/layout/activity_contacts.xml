@@ -9,11 +9,10 @@
 
     <Button
         android:id="@+id/LogOutID"
-        android:text="@string/logOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="270dp"
-        >
+        android:text="@string/logOut">
 
     </Button>
 
@@ -43,7 +42,6 @@
         </TextView>
 
     </LinearLayout>
-
 
 
 </LinearLayout>
