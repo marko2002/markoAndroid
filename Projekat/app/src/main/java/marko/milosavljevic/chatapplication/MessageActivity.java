@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MessageActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,6 +32,16 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         message = findViewById(R.id.massageTextID);
 
 
+
+        MessageAdapter messageAdapter = new MessageAdapter(this);
+
+        messageAdapter.AddMessage(new MessageModel("MARKOOOOOOOOOOOO"));
+        ListView list = findViewById(R.id.messageListID);
+        list.setAdapter(messageAdapter);
+
+
+
+
         message.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -45,9 +56,9 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void afterTextChanged(Editable editable) {
 
-                String text = message.getText().toString();
+                String text1 = message.getText().toString();
 
-                if(text.length()!= 0 ){
+                if(text1.length()!= 0 ){
                     send.setEnabled(true);
                 }else{
                     send.setEnabled(false);
@@ -71,18 +82,14 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         }else if(view.getId() == R.id.sendBtnID){
 
             Context context = getApplicationContext();
-
             CharSequence text = "Message is sent!";
-
             int duration = Toast.LENGTH_SHORT;
-
-
-
             Toast toast = Toast.makeText(context, text, duration);
-
             toast.show();
 
             message.setText("");
+
+
         }
 
     }
