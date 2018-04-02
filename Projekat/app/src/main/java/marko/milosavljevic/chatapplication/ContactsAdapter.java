@@ -23,17 +23,16 @@ public class ContactsAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Model> mContacts;
 
-    public ContactsAdapter(Context context){
+    public ContactsAdapter(Context context) {
         mContext = context;
         mContacts = new ArrayList<Model>();
     }
 
-    public void AddContacts(Model model){
+    public void AddContacts(Model model) {
         mContacts.add(model);
         notifyDataSetChanged();
 
     }
-
 
 
     @Override
@@ -43,10 +42,10 @@ public class ContactsAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        Object rv =null;
+        Object rv = null;
         try {
-            rv=mContacts.get(i);
-        }catch (IndexOutOfBoundsException e){
+            rv = mContacts.get(i);
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
         return rv;
@@ -58,19 +57,24 @@ public class ContactsAdapter extends BaseAdapter {
     }
 
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.row_item,null);
+            convertView = inflater.inflate(R.layout.row_item, null);
             ImageView send = (ImageView) convertView.findViewById(R.id.imageViewID);
+            final View bundle1 = convertView;
             send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    TextView text = bundle1.findViewById(R.id.textNameID);
+                    String name = text.getText().toString();
+                    bundle.putString("textNameID", name);
 
-                    Intent intent = new Intent(mContext,MessageActivity.class);
+                    Intent intent = new Intent(mContext, MessageActivity.class);
+                    intent.putExtras(bundle);
                     mContext.startActivity(intent);
 
                 }
@@ -78,7 +82,7 @@ public class ContactsAdapter extends BaseAdapter {
 
             ViewHolder holder = new ViewHolder();
 
-            holder.letter=(TextView) convertView.findViewById(R.id.letterID);
+            holder.letter = (TextView) convertView.findViewById(R.id.letterID);
             holder.name = (TextView) convertView.findViewById(R.id.textNameID);
             holder.image = (ImageView) convertView.findViewById(R.id.imageViewID);
             holder.letter.setBackgroundColor(randomColor());
@@ -98,7 +102,7 @@ public class ContactsAdapter extends BaseAdapter {
     }
 
 
-    public int randomColor(){
+    public int randomColor() {
 
         Random rnd = new Random();
 
@@ -107,15 +111,13 @@ public class ContactsAdapter extends BaseAdapter {
     }
 
 
-    public class ViewHolder{
+    public class ViewHolder {
 
         public TextView letter = null;
         public TextView name = null;
-        public ImageView image =null;
+        public ImageView image = null;
 
     }
-
-
 
 
 }

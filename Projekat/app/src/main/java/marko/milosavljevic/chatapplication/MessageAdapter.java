@@ -2,6 +2,7 @@ package marko.milosavljevic.chatapplication;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,12 @@ public class MessageAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void RemoveMessage(MessageModel model) {
+        mMessages.remove(model);
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public int getCount() {
         return mMessages.size();
@@ -53,9 +60,9 @@ public class MessageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView==null){
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.row_item_messages,null);
+            convertView = inflater.inflate(R.layout.row_item_messages, null);
             ViewHolder holder = new ViewHolder();
             holder.message = (TextView) convertView.findViewById(R.id.rowItemMessageID);
             convertView.setTag(holder);
@@ -66,26 +73,25 @@ public class MessageAdapter extends BaseAdapter {
         ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.message.setText(model.mMessage);
 
+        if (model.mColor == true) {
+            holder.message.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.message.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
+        } else {
+
+            holder.message.setBackgroundColor(Color.parseColor("#b7b3b3"));
+            holder.message.setGravity(Gravity.CENTER_VERTICAL | Gravity.START);
+
+        }
+
         return convertView;
     }
 
 
-    public int randomColor(){
+    public class ViewHolder {
 
-        Random rnd = new Random();
-
-        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        public TextView message = null;
 
     }
-
-
-    public class ViewHolder{
-
-    public TextView message;
-
-    }
-
-
 
 
 }
