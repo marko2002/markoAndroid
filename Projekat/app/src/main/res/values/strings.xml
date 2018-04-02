@@ -17,7 +17,8 @@
     <string name="logOut">LOG OUT</string>
     <string name="Send">SEND</string>
     <string name="messageText">message text</string>
-    <string name="messageSent">message sent</string>
+    <string name="messageSent">Message is sent!</string>
+    <string name="messageDeleted">Message is deleted!</string>
     <string name="birthDate">Birth date:</string>
 
 

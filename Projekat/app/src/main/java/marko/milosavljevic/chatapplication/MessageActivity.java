@@ -65,6 +65,12 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 MessageModel message = (MessageModel) messageAdapter.getItem(position);
                 messageAdapter.RemoveMessage(message);
                 messageAdapter.notifyDataSetChanged();
+                Context context = getApplicationContext();
+                CharSequence text = getResources().getString(R.string.messageDeleted);
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
                 return true;
             }
         });
@@ -73,12 +79,10 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         message.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -90,13 +94,9 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                     send.setEnabled(true);
                 } else {
                     send.setEnabled(false);
-
                 }
-
             }
         });
-
-
     }
 
     @Override
@@ -110,7 +110,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         } else if (view.getId() == R.id.sendBtnID) {
 
             Context context = getApplicationContext();
-            CharSequence text = "Message is sent!";
+            CharSequence text = getResources().getString(R.string.messageSent);
             int duration = Toast.LENGTH_SHORT;
 
             String messageForSend = message.getText().toString();
@@ -118,7 +118,6 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-
             message.setText("");
 
 

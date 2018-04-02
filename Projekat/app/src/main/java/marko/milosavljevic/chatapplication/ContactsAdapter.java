@@ -31,7 +31,6 @@ public class ContactsAdapter extends BaseAdapter {
     public void AddContacts(Model model) {
         mContacts.add(model);
         notifyDataSetChanged();
-
     }
 
 
@@ -81,14 +80,12 @@ public class ContactsAdapter extends BaseAdapter {
             });
 
             ViewHolder holder = new ViewHolder();
-
             holder.letter = (TextView) convertView.findViewById(R.id.letterID);
             holder.name = (TextView) convertView.findViewById(R.id.textNameID);
             holder.image = (ImageView) convertView.findViewById(R.id.imageViewID);
             holder.letter.setBackgroundColor(randomColor());
 
             convertView.setTag(holder);
-
         }
 
         Model model = (Model) getItem(position);
@@ -98,16 +95,13 @@ public class ContactsAdapter extends BaseAdapter {
         holder.image.setImageDrawable(model.mImage);
 
         return convertView;
-
     }
 
 
     public int randomColor() {
 
         Random rnd = new Random();
-
         return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-
     }
 
 
@@ -116,8 +110,5 @@ public class ContactsAdapter extends BaseAdapter {
         public TextView letter = null;
         public TextView name = null;
         public ImageView image = null;
-
     }
-
-
 }

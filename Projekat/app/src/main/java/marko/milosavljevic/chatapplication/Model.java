@@ -12,7 +12,7 @@ public class Model {
     public String mName;
     public Drawable mImage;
 
-    public Model (String mLetter,String mName,Drawable mImage){
+    public Model(String mLetter, String mName, Drawable mImage) {
         this.mLetter = mLetter;
         this.mName = mName;
         this.mImage = mImage;

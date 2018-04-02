@@ -66,7 +66,6 @@ public class MessageAdapter extends BaseAdapter {
             ViewHolder holder = new ViewHolder();
             holder.message = (TextView) convertView.findViewById(R.id.rowItemMessageID);
             convertView.setTag(holder);
-
         }
 
         MessageModel model = (MessageModel) getItem(position);
@@ -80,7 +79,6 @@ public class MessageAdapter extends BaseAdapter {
 
             holder.message.setBackgroundColor(Color.parseColor("#b7b3b3"));
             holder.message.setGravity(Gravity.CENTER_VERTICAL | Gravity.START);
-
         }
 
         return convertView;
@@ -90,8 +88,5 @@ public class MessageAdapter extends BaseAdapter {
     public class ViewHolder {
 
         public TextView message = null;
-
     }
-
-
 }

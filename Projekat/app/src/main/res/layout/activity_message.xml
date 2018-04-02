@@ -39,7 +39,7 @@
         android:layout_marginBottom="55dp"
         android:layout_marginTop="60dp"
         android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll" />
+        android:transcriptMode="alwaysScroll"/>
 
 
     <LinearLayout
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:ems="12"
-            android:hint="@string/messageText" />
+            android:hint="@string/messageText"/>
 
         <Button
             android:id="@+id/sendBtnID"

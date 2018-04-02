@@ -17,7 +17,9 @@
             android:background="@color/textColor"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="20dp"></TextView>
+            android:textSize="20dp">
+
+        </TextView>
 
         <TextView
             android:id="@+id/textNameID"
@@ -33,10 +35,10 @@
         <ImageView
             android:id="@+id/imageViewID"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="39dp"
             android:layout_alignParentRight="true"
             android:layout_gravity="center"
-            android:background="@drawable/ic_action_name"
-            android:clickable="true" />
+            android:clickable="true"
+            android:tint="@color/colorPrimary" />
     </LinearLayout>
 </RelativeLayout>

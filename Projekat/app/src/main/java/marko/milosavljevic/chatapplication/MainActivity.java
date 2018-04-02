@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText username;
     private EditText password;
@@ -32,32 +32,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         register.setOnClickListener(this);
 
 
-
         username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 String text = username.getText().toString();
 
-                if(text.length()!=0){
-                    usernameEnt=true;
-                    if(passwordEnt==true) {
+                if (text.length() != 0) {
+                    usernameEnt = true;
+                    if (passwordEnt == true) {
 
                         login.setEnabled(true);
-
                     }
-                }else{
-
-                    usernameEnt=false;
+                } else {
+                    usernameEnt = false;
                     login.setEnabled(false);
                 }
             }
@@ -66,13 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-
             }
 
             @Override
@@ -80,41 +72,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 String text = password.getText().toString();
 
-                if(text.length()>=6) {
+                if (text.length() >= 6) {
 
                     passwordEnt = true;
                     if (usernameEnt == true) {
                         login.setEnabled(true);
                     }
-                }else{
-
-                        passwordEnt=false;
-                        login.setEnabled(false);
-
+                } else {
+                    passwordEnt = false;
+                    login.setEnabled(false);
                 }
-
             }
         });
-
-
-
     }
 
     @Override
     public void onClick(View view) {
 
-        if(view.getId()==R.id.registerID){
+        if (view.getId() == R.id.registerID) {
 
-            Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
-
         }
-            if(view.getId()==R.id.loginID){
+        if (view.getId() == R.id.loginID) {
 
-            Intent intent1 = new Intent(MainActivity.this,ContactsActivity.class);
+            Intent intent1 = new Intent(MainActivity.this, ContactsActivity.class);
             startActivity(intent1);
-
         }
-
     }
 }

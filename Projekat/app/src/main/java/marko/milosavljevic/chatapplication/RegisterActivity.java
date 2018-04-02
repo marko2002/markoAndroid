@@ -26,7 +26,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private DatePicker datePicker;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,108 +44,94 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 String text = username.getText().toString();
 
-                if(text.length()!=0){
-                    usernameVer=true;
-                    if(passwordVer==true && emailVer==true){
-                    register.setEnabled(true);
+                if (text.length() != 0) {
+                    usernameVer = true;
+                    if (passwordVer == true && emailVer == true) {
+                        register.setEnabled(true);
                     }
-                }else{
-                    usernameVer=false;
+                } else {
+                    usernameVer = false;
                     register.setEnabled(false);
-
                 }
             }
         });
 
-            password.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                String text = password.getText().toString();
+
+                if (text.length() >= 6) {
+                    passwordVer = true;
+                    if (usernameVer == true && emailVer == true) {
+                        register.setEnabled(true);
+                    }
+                } else {
+                    passwordVer = false;
+                    register.setEnabled(false);
                 }
+            }
+        });
 
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-                }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-                @Override
-                public void afterTextChanged(Editable editable) {
+            @Override
+            public void afterTextChanged(Editable editable) {
 
-                    String text = password.getText().toString();
+                String text = email.getText().toString();
 
-                    if(text.length()>=6){
-                        passwordVer=true;
-                        if(usernameVer==true && emailVer==true){
-                            register.setEnabled(true);
+                if (text.length() != 0 && Patterns.EMAIL_ADDRESS.matcher(text).matches()) {
 
-                        }
-                    }else{
-                        passwordVer=false;
-                        register.setEnabled(false);
+                    emailVer = true;
 
+                    if (usernameVer == true && passwordVer == true) {
+                        register.setEnabled(true);
                     }
 
+                } else {
+                    register.setEnabled(false);
                 }
-            });
-
-            email.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-
-                    String text = email.getText().toString();
-
-                    if (text.length() != 0 && Patterns.EMAIL_ADDRESS.matcher(text).matches()){
-
-                        emailVer=true;
-
-                        if(usernameVer==true && passwordVer==true){
-                            register.setEnabled(true);
-                        }
-
-                    }else{
-                            register.setEnabled(false);
-                    }
-
-                }
-            });
+            }
+        });
 
         Date c = Calendar.getInstance().getTime();
 
         datePicker.setMaxDate(c.getTime());
-
     }
 
     @Override
     public void onClick(View view) {
 
-        if(view.getId()==R.id.registerActvButtonID){
+        if (view.getId() == R.id.registerActvButtonID) {
 
-            Intent intent = new Intent(RegisterActivity.this,ContactsActivity.class);
+            Intent intent = new Intent(RegisterActivity.this, ContactsActivity.class);
             startActivity(intent);
-
         }
-
     }
 }
