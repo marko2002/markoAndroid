@@ -70,16 +70,9 @@ public class MessageAdapter extends BaseAdapter {
 
         MessageModel model = (MessageModel) getItem(position);
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        holder.message.setText(model.mMessage);
+        holder.message.setText(model.getmMessage());
 
-        if (model.mColor == true) {
-            holder.message.setBackgroundColor(Color.parseColor("#ffffff"));
-            holder.message.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
-        } else {
 
-            holder.message.setBackgroundColor(Color.parseColor("#b7b3b3"));
-            holder.message.setGravity(Gravity.CENTER_VERTICAL | Gravity.START);
-        }
 
         return convertView;
     }

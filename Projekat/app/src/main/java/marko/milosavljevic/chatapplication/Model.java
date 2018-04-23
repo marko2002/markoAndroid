@@ -8,37 +8,33 @@ import android.graphics.drawable.Drawable;
 
 public class Model {
 
-    public String mLetter;
-    public String mName;
-    public Drawable mImage;
+    private String mmId;
+    private String mmFirst_name;
+    private String mmLast_name;
+    private String mmUsername;
 
-    public Model(String mLetter, String mName, Drawable mImage) {
-        this.mLetter = mLetter;
-        this.mName = mName;
-        this.mImage = mImage;
+    public Model(String mId, String mFirst_name, String mLast_name, String mUsername) {
+        this.mmId = mId;
+        this.mmFirst_name = mFirst_name;
+        this.mmLast_name = mLast_name;
+        this.mmUsername = mUsername;
     }
 
-    public String getmLetter() {
-        return mLetter;
+    public String getmId() {
+        return mmId;
     }
 
-    public void setmLetter(String mLetter) {
-        this.mLetter = mLetter;
+    public String getmFirst_name() {
+        return mmFirst_name;
     }
 
-    public String getmName() {
-        return mName;
+    public String getmLast_name() {
+        return mmLast_name;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
-    }
-
-    public Drawable getmImage() {
-        return mImage;
-    }
-
-    public void setmImage(Drawable mImage) {
-        this.mImage = mImage;
+    public String getmUsername() {
+        return mmUsername;
     }
 }
+
+

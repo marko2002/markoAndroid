@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -22,8 +23,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText username;
     private EditText password;
     private EditText email;
+    private EditText firstname;
+    private EditText lastname;
     private Button register;
     private DatePicker datePicker;
+    private DbHelper db;
+    private int existing = 1;
 
 
     @Override
@@ -33,9 +38,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         username = findViewById(R.id.usernameRegID);
         password = findViewById(R.id.passwordRegID);
+        firstname = findViewById(R.id.firstNameID);
+        lastname = findViewById(R.id.lastNameID);
         email = findViewById(R.id.emailRegID);
         datePicker = findViewById(R.id.datePickerID);
 
+        db = new DbHelper(this);
 
         register = findViewById(R.id.registerActvButtonID);
         register.setOnClickListener(this);
@@ -129,9 +137,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
 
         if (view.getId() == R.id.registerActvButtonID) {
+            Model[] contact = db.ContactRead();
+            if(contact!=null){
+                for(int i = 0 ; i<contact.length;i++){
+                    existing=contact[i].getmUsername().compareTo(username.getText().toString());
+                    if(existing==0){
+                        break;
+                    }
+                }
+            }
+            if(existing != 0){
+                existing=1;
+                Model model = new Model(null,firstname.getText().toString(),lastname.getText().toString(),username.getText().toString());
+                db.ContactInsert(model);
+                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(getApplicationContext(), R.string.existingUsername, Toast.LENGTH_LONG).show();
+            }
 
-            Intent intent = new Intent(RegisterActivity.this, ContactsActivity.class);
-            startActivity(intent);
         }
     }
 }

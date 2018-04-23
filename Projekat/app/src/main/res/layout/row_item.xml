@@ -32,11 +32,12 @@
         </TextView>
 
 
-        <ImageView
+        <ImageButton
             android:id="@+id/imageViewID"
             android:layout_width="wrap_content"
-            android:layout_height="39dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:background="@drawable/send_button"
             android:layout_gravity="center"
             android:clickable="true"
             android:tint="@color/colorPrimary" />

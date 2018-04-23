@@ -7,20 +7,35 @@ package marko.milosavljevic.chatapplication;
 
 public class MessageModel {
 
-    public String mMessage;
-    public boolean mColor = false;
+    private String mMessageId;
+    private String mSenderID;
+    private String mReceiverId;
+    private String mMessage;
+    private boolean mColor = false;
 
+    public MessageModel(String mMessageId, String mSenderID, String mReceiverId, String mMessage, boolean mColor) {
+        this.mMessageId = mMessageId;
+        this.mSenderID = mSenderID;
+        this.mReceiverId = mReceiverId;
+        this.mMessage = mMessage;
+        this.mColor = mColor;
+    }
 
-    public MessageModel(String message, boolean color) {
-        this.mMessage = message;
-        this.mColor = color;
+    public String getmMessageId() {
+        return mMessageId;
+    }
+
+    public String getmSenderID() {
+        return mSenderID;
+    }
+
+    public String getmReceiverId() {
+        return mReceiverId;
     }
 
     public String getmMessage() {
         return mMessage;
     }
 
-    public void setmMessage(String message) {
-        this.mMessage = message;
-    }
+
 }

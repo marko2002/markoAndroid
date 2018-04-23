@@ -28,8 +28,14 @@ public class ContactsAdapter extends BaseAdapter {
         mContacts = new ArrayList<Model>();
     }
 
-    public void AddContacts(Model model) {
-        mContacts.add(model);
+    public void AddContacts(Model[] model) {
+        mContacts.clear();
+        if(model!=null){
+            for(Model modell : model){
+                mContacts.add(modell);
+            }
+        }
+
         notifyDataSetChanged();
     }
 
@@ -83,6 +89,7 @@ public class ContactsAdapter extends BaseAdapter {
             holder.letter = (TextView) convertView.findViewById(R.id.letterID);
             holder.name = (TextView) convertView.findViewById(R.id.textNameID);
             holder.image = (ImageView) convertView.findViewById(R.id.imageViewID);
+            holder.image.setTag(position);
             holder.letter.setBackgroundColor(randomColor());
 
             convertView.setTag(holder);
@@ -90,9 +97,10 @@ public class ContactsAdapter extends BaseAdapter {
 
         Model model = (Model) getItem(position);
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        holder.letter.setText(model.mLetter);
-        holder.name.setText(model.mName);
-        holder.image.setImageDrawable(model.mImage);
+        holder.letter.setText(model.getmFirst_name().substring(0,1).toUpperCase());
+        String name = model.getmFirst_name() + " " + model.getmLast_name();
+        holder.name.setText(name);
+        holder.image.setTag(model.getmId());
 
         return convertView;
     }

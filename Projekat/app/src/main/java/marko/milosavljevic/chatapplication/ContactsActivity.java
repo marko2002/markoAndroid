@@ -15,6 +15,8 @@ import android.widget.TextView;
 public class ContactsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button logOut;
+    private DbHelper db;
+    private ContactsAdapter contactsAdapter;
 
 
     @Override
@@ -26,15 +28,25 @@ public class ContactsActivity extends AppCompatActivity implements View.OnClickL
         logOut.setOnClickListener(this);
 
 
-        ContactsAdapter contactsAdapter = new ContactsAdapter(this);
-        contactsAdapter.AddContacts(new Model(("" + getResources().getString(R.string.contact1).toString().charAt(0)), getResources().getString(R.string.contact1).toString(), getResources().getDrawable(R.drawable.send_button)));
+         contactsAdapter = new ContactsAdapter(this);
+      /*  contactsAdapter.AddContacts(new Model(("" + getResources().getString(R.string.contact1).toString().charAt(0)), getResources().getString(R.string.contact1).toString(), getResources().getDrawable(R.drawable.send_button)));
         contactsAdapter.AddContacts(new Model(("" + getResources().getString(R.string.contact2).toString().charAt(0)), getResources().getString(R.string.contact2).toString(), getResources().getDrawable(R.drawable.send_button)));
         contactsAdapter.AddContacts(new Model(("" + getResources().getString(R.string.contact3).toString().charAt(0)), getResources().getString(R.string.contact3).toString(), getResources().getDrawable(R.drawable.send_button)));
         contactsAdapter.AddContacts(new Model(("" + getResources().getString(R.string.contact4).toString().charAt(0)), getResources().getString(R.string.contact4).toString(), getResources().getDrawable(R.drawable.send_button)));
         contactsAdapter.AddContacts(new Model(("" + getResources().getString(R.string.contact5).toString().charAt(0)), getResources().getString(R.string.contact5).toString(), getResources().getDrawable(R.drawable.send_button)));
-
+*/
         ListView list = findViewById(R.id.contactListID);
         list.setAdapter(contactsAdapter);
+        db = new DbHelper(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Model[] models = db.ContactRead();
+        contactsAdapter.AddContacts(models);
+
     }
 
     @Override

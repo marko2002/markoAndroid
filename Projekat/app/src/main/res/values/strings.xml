@@ -37,5 +37,7 @@
     <string name="message6">Sure meet me at 8</string>
     <string name="message7">Fine, see you</string>
 
+    <string name="existingUsername">Username already exist!</string>
+
 
 </resources>

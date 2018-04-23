@@ -45,14 +45,14 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         contact.setText(name);
 
 
-        messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message1).toString(), true));
+       /* messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message1).toString(), true));
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message2).toString(), false));
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message3).toString(), true));
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message4).toString(), false));
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message5).toString(), true));
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message6).toString(), false));
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message7).toString(), true));
-
+    */
         list.setAdapter(messageAdapter);
 
 
@@ -114,7 +114,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
             int duration = Toast.LENGTH_SHORT;
 
             String messageForSend = message.getText().toString();
-            messageAdapter.AddMessage(new MessageModel(messageForSend, true));
+           // messageAdapter.AddMessage(new MessageModel(messageForSend, true));
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
