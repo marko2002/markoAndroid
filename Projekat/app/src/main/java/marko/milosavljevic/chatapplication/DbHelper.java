@@ -25,8 +25,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_LAST_NAME = "lastname";
 
     public static final String TABLE_NAME_MESSAGE = "Message";
-    public static final String COLUMN_SENDER_ID = "sender_id";
     public static final String COLUMN_MESSAGE_ID = "message_id";
+    public static final String COLUMN_SENDER_ID = "sender_id";
     public static final String COLUMN_RECEIVER_ID = "receiver_id";
     public static final String COLUMN_MESSAGE = "message";
 
@@ -117,9 +117,9 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-    public MessageModel[] readMessages() {
+    public MessageModel[] readMessages(String sender, String receiver) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME_MESSAGE, null, null, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME_MESSAGE, null, "(sender_id =? AND receiver_id =?) OR (sender_id =? AND receiver_id =?)", new String[] {sender,receiver,receiver,sender}, null, null, null, null);
 
         if(cursor.getCount() <= 0) {
             return null;
@@ -135,12 +135,13 @@ public class DbHelper extends SQLiteOpenHelper {
         return messages;
     }
 
+
     private MessageModel createMessage(Cursor cursor) {
         String message_id = cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_ID));
         String sender_id = cursor.getString(cursor.getColumnIndex(COLUMN_SENDER_ID));
         String receiver_id = cursor.getString(cursor.getColumnIndex(COLUMN_RECEIVER_ID));
         String message = cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE));
-        return new MessageModel(message_id, sender_id, receiver_id, message, false);
+        return new MessageModel(message_id, sender_id, receiver_id, message);
     }
 
     public void deleteMessage(String index) {

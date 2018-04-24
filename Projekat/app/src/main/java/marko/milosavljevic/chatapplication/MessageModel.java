@@ -11,14 +11,14 @@ public class MessageModel {
     private String mSenderID;
     private String mReceiverId;
     private String mMessage;
-    private boolean mColor = false;
 
-    public MessageModel(String mMessageId, String mSenderID, String mReceiverId, String mMessage, boolean mColor) {
+
+    public MessageModel(String mMessageId, String mSenderID, String mReceiverId, String mMessage) {
         this.mMessageId = mMessageId;
         this.mSenderID = mSenderID;
         this.mReceiverId = mReceiverId;
         this.mMessage = mMessage;
-        this.mColor = mColor;
+
     }
 
     public String getmMessageId() {

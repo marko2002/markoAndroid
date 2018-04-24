@@ -1,6 +1,7 @@
 package marko.milosavljevic.chatapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,10 @@ public class ContactsActivity extends AppCompatActivity implements View.OnClickL
     private Button logOut;
     private DbHelper db;
     private ContactsAdapter contactsAdapter;
+    private Model[] contacts;
+
+    private static final String SHARED_PREFERENCES = "SharedPreferences";
+    private String userID;
 
 
     @Override
@@ -38,16 +43,30 @@ public class ContactsActivity extends AppCompatActivity implements View.OnClickL
         ListView list = findViewById(R.id.contactListID);
         list.setAdapter(contactsAdapter);
         db = new DbHelper(this);
+
+        SharedPreferences preferences = getSharedPreferences(SHARED_PREFERENCES,MODE_PRIVATE);
+        userID = preferences.getString("sender_id1",null);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Model[] models = db.ContactRead();
-        contactsAdapter.AddContacts(models);
+        contacts = db.ContactRead();
+        contactsAdapter.AddContacts(contacts);
+
+        if(contacts != null){
+            for(int i =0 ; i< contacts.length;i++){
+                if(contacts[i].getmId().compareTo(userID)==0){
+                    contactsAdapter.removeContact(i);
+                    break;
+                }
+            }
+        }
 
     }
+
+
 
     @Override
     public void onClick(View view) {

@@ -2,6 +2,7 @@ package marko.milosavljevic.chatapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ public class ContactsAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Model> mContacts;
 
+    private static final String SHARED_PREFERENCES = "SharedPreferences";
+
     public ContactsAdapter(Context context) {
         mContext = context;
         mContacts = new ArrayList<Model>();
@@ -36,6 +39,11 @@ public class ContactsAdapter extends BaseAdapter {
             }
         }
 
+        notifyDataSetChanged();
+    }
+
+    public void removeContact(int position){
+        mContacts.remove(position);
         notifyDataSetChanged();
     }
 
@@ -77,6 +85,10 @@ public class ContactsAdapter extends BaseAdapter {
                     TextView text = bundle1.findViewById(R.id.textNameID);
                     String name = text.getText().toString();
                     bundle.putString("textNameID", name);
+
+                    SharedPreferences.Editor editor = mContext.getSharedPreferences(SHARED_PREFERENCES,Context.MODE_PRIVATE).edit();
+                    editor.putString("receiver_id1",view.getTag().toString());
+                    editor.apply();
 
                     Intent intent = new Intent(mContext, MessageActivity.class);
                     intent.putExtras(bundle);

@@ -2,6 +2,7 @@ package marko.milosavljevic.chatapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,6 +23,13 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
     private EditText message;
     private ListView list;
     final MessageAdapter messageAdapter = new MessageAdapter(this);
+    private DbHelper db;
+    private MessageModel[] bufferedMessages;
+
+    private static final String SHARED_PREFERENCES = "SharedPreferences";
+    private String senderID;
+    private String receiverID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +53,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         contact.setText(name);
 
 
+
        /* messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message1).toString(), true));
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message2).toString(), false));
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message3).toString(), true));
@@ -53,6 +62,13 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message6).toString(), false));
         messageAdapter.AddMessage(new MessageModel(getResources().getString(R.string.message7).toString(), true));
     */
+
+        SharedPreferences  preferences = getSharedPreferences(SHARED_PREFERENCES,MODE_PRIVATE);
+        senderID = preferences.getString("sender_id1",null);
+        receiverID = preferences.getString("receiver_id1",null);
+
+        db = new DbHelper(this);
+
         list.setAdapter(messageAdapter);
 
 
@@ -62,15 +78,25 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                MessageModel message = (MessageModel) messageAdapter.getItem(position);
-                messageAdapter.RemoveMessage(message);
-                messageAdapter.notifyDataSetChanged();
-                Context context = getApplicationContext();
-                CharSequence text = getResources().getString(R.string.messageDeleted);
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                final int deletePos = position;
+                final MessageModel message = (MessageModel) messageAdapter.getItem(deletePos);
 
+
+
+                if (bufferedMessages!=null) {
+                    for (int i = 0; i < bufferedMessages.length; i++) {
+                        if (bufferedMessages[i].getmMessageId().compareTo(message.getmMessageId()) == 0) {
+                            db.deleteMessage(message.getmMessageId());
+                            Context context = getApplicationContext();
+                            CharSequence text = getResources().getString(R.string.messageDeleted);
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                            break;
+                        }
+                    }
+                }
+                updateList();
                 return true;
             }
         });
@@ -100,6 +126,12 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        updateList();
+    }
+
+    @Override
     public void onClick(View view) {
 
         if (view.getId() == R.id.messageActvLogOutBtnID) {
@@ -114,8 +146,9 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
             int duration = Toast.LENGTH_SHORT;
 
             String messageForSend = message.getText().toString();
-           // messageAdapter.AddMessage(new MessageModel(messageForSend, true));
-
+            MessageModel mess = new MessageModel(null,senderID,receiverID,messageForSend);
+            db.insertMessage(mess);
+            updateList();
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
             message.setText("");
@@ -124,4 +157,12 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         }
 
     }
+
+    public void updateList(){
+
+        bufferedMessages = db.readMessages(senderID,receiverID);
+        messageAdapter.AddMessage1(bufferedMessages);
+
+    }
+
 }

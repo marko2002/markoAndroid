@@ -1,6 +1,7 @@
 package marko.milosavljevic.chatapplication;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ public class MessageAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<MessageModel> mMessages;
 
+    private static final String SHARED_PREFERENCES = "SharedPreferences";
+
     public MessageAdapter(Context context) {
         mContext = context;
         mMessages = new ArrayList<MessageModel>();
@@ -28,6 +31,16 @@ public class MessageAdapter extends BaseAdapter {
 
     public void AddMessage(MessageModel model) {
         mMessages.add(model);
+        notifyDataSetChanged();
+    }
+
+    public void AddMessage1(MessageModel[] mess){
+        mMessages.clear();
+        if(mess!=null){
+            for(MessageModel mess1 : mess){
+                mMessages.add(mess1);
+            }
+        }
         notifyDataSetChanged();
     }
 
@@ -71,6 +84,11 @@ public class MessageAdapter extends BaseAdapter {
         MessageModel model = (MessageModel) getItem(position);
         ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.message.setText(model.getmMessage());
+
+        SharedPreferences preferences = mContext.getSharedPreferences(SHARED_PREFERENCES,mContext.MODE_PRIVATE);
+        String senderID = preferences.getString("sender_id1",null);
+        holder.message.setBackgroundColor(Color.parseColor("#ffffff"));
+        holder.message.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
 
 
 
