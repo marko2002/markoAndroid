@@ -40,4 +40,6 @@
     <string name="existingUsername">Username already exist!</string>
     <string name="usernameDosentExist">There is no such user! </string>
 
+    <string name="userRegistration">User registered!</string>
+
 </resources>

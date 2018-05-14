@@ -1,6 +1,8 @@
 package marko.milosavljevic.chatapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +14,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,6 +36,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private DbHelper db;
     private int existing = 1;
 
+    private HttpHelper httpHelper;
+    private Handler handler;
+    private static String BASE_URL = "http://18.205.194.168:80";
+    private static String REGISTER_URL = BASE_URL + "/register";
+
+    public static final String MY_PREFS_NAME = "MyPrefs";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +57,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         datePicker = findViewById(R.id.datePickerID);
 
         db = new DbHelper(this);
+
+        httpHelper = new HttpHelper();
+        handler = new Handler();
 
         register = findViewById(R.id.registerActvButtonID);
         register.setOnClickListener(this);
@@ -136,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
 
-        if (view.getId() == R.id.registerActvButtonID) {
+       /* if (view.getId() == R.id.registerActvButtonID) {
             Model[] contact = db.ContactRead();
             if(contact!=null){
                 for(int i = 0 ; i<contact.length;i++){
@@ -156,6 +172,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(getApplicationContext(), R.string.existingUsername, Toast.LENGTH_LONG).show();
             }
 
-        }
+        }*/
+
+       if(view.getId()==R.id.registerActvButtonID){
+           new Thread(new Runnable() {
+               @Override
+               public void run() {
+                   JSONObject jsonObject = new JSONObject();
+                   try {
+                       jsonObject.put("username",username);
+                       jsonObject.put("password",password);
+                       jsonObject.put("email",email);
+
+                       final boolean check = httpHelper.registerNewUser(RegisterActivity.this,REGISTER_URL,jsonObject);
+
+                       handler.post(new Runnable() {
+                           @Override
+                           public void run() {
+                               if(check){
+                                   Toast.makeText(RegisterActivity.this,getText(R.string.userRegistration),Toast.LENGTH_SHORT).show();
+                                   Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                   startActivity(intent);
+                               }else{
+                                   SharedPreferences preferences = getSharedPreferences(MY_PREFS_NAME,MODE_PRIVATE);
+                                   String error_message = preferences.getString("error_message_register",null);
+                                   Toast.makeText(RegisterActivity.this,error_message,Toast.LENGTH_SHORT).show();
+                               }
+                           }
+                       });
+                   }catch (JSONException e){
+                       e.printStackTrace();
+                   }catch (IOException e){
+                       e.printStackTrace();
+                   }
+               }
+           }).start();
+       }
     }
 }

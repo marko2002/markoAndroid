@@ -1,7 +1,9 @@
 package marko.milosavljevic.chatapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,6 +29,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private DbHelper db;
     private static final String SHARED_PREFERENCES = "SharedPreferences";
+    private Context context;
+
+    private HttpHelper httpHelper;
+    private Handler handler;
+
+    private static String BASE_URL = "http://18.205.194.168:80";
+    private static String LOGIN_URL = BASE_URL + "/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +49,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         login.setOnClickListener(this);
         register = findViewById(R.id.registerID);
         register.setOnClickListener(this);
-
         db = new DbHelper(this);
+        context = this;
+        httpHelper = new HttpHelper();
+        handler = new Handler();
 
         username.addTextChangedListener(new TextWatcher() {
             @Override
@@ -101,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else if (view.getId() == R.id.loginID) {
-            int found=0;
+           /* int found=0;
 
             Intent intent1 = new Intent(MainActivity.this, ContactsActivity.class);
             //startActivity(intent1);
@@ -122,6 +138,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }else {
                 Toast.makeText(this,R.string.usernameDosentExist,Toast.LENGTH_SHORT).show();
             }
+            */
+            new Thread(new Runnable() {
+                public void run() {
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("username", username.getText().toString());
+                        jsonObject.put("password", password.getText().toString());
+
+                        final boolean response = httpHelper.logInUser(context, LOGIN_URL, jsonObject);
+
+                        handler.post(new Runnable(){
+                            public void run() {
+                                if (response) {
+                                    SharedPreferences.Editor editor = context.getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE).edit();
+                                    editor.putString("loggedin_username", username.getText().toString());
+                                    editor.apply();
+
+                                    Intent intent = new Intent(MainActivity.this, ContactsActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+                                    String error_message = prefs.getString("error_message_login", null);
+                                    Toast.makeText(MainActivity.this, error_message, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
+
 
         }
     }
