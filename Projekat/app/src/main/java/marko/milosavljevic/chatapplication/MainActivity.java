@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean passwordEnt = false;
     boolean usernameEnt = false;
 
-    private DbHelper db;
+   // private DbHelper db;
     private static final String SHARED_PREFERENCES = "SharedPreferences";
     private Context context;
 
@@ -152,15 +152,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void run() {
                                 if (response) {
                                     SharedPreferences.Editor editor = context.getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE).edit();
-                                    editor.putString("loggedin_username", username.getText().toString());
+                                    editor.putString("sender_id1", username.getText().toString());
                                     editor.apply();
 
-                                    Intent intent = new Intent(MainActivity.this, ContactsActivity.class);
-                                    startActivity(intent);
+                                    Intent intent2 = new Intent(MainActivity.this, ContactsActivity.class);
+                                    startActivity(intent2);
                                 } else {
                                     SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
-                                    String error_message = prefs.getString("error_message_login", null);
-                                    Toast.makeText(MainActivity.this, error_message, Toast.LENGTH_SHORT).show();
+                                    String error_message = prefs.getString("loginErr", null);
+                                    Toast.makeText(MainActivity.this, R.string.message4,Toast.LENGTH_LONG).show();
+                                 //   Toast.makeText(MainActivity.this, error_message, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

@@ -33,8 +33,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText lastname;
     private Button register;
     private DatePicker datePicker;
-    private DbHelper db;
-    private int existing = 1;
+   // private DbHelper db;
+    //private int existing = 1;
 
     private HttpHelper httpHelper;
     private Handler handler;
@@ -180,9 +180,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                public void run() {
                    JSONObject jsonObject = new JSONObject();
                    try {
-                       jsonObject.put("username",username);
-                       jsonObject.put("password",password);
-                       jsonObject.put("email",email);
+                       jsonObject.put("username",username.getText().toString());
+                       jsonObject.put("password",password.getText().toString());
+                       jsonObject.put("email",email.getText().toString());
 
                        final boolean check = httpHelper.registerNewUser(RegisterActivity.this,REGISTER_URL,jsonObject);
 

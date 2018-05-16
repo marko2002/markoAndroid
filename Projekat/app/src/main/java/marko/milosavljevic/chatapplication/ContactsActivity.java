@@ -24,9 +24,9 @@ import java.io.IOException;
 public class ContactsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button logOut;
-    private DbHelper db;
+   // private DbHelper db;
     private ContactsAdapter contactsAdapter;
-    private Model[] contacts;
+    private Model[] contacts_class;;
     private Button refreshButton;
 
     private static final String SHARED_PREFERENCES = "SharedPreferences";
@@ -71,6 +71,7 @@ public class ContactsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
+        updateContactList();
 
        /* contacts = db.ContactRead();
         contactsAdapter.AddContacts(contacts);
@@ -126,7 +127,7 @@ public class ContactsActivity extends AppCompatActivity implements View.OnClickL
     public void updateContactList() {
 
         new Thread(new Runnable() {
-            Model[] contacts_class;
+
             public void run() {
                 try {
                     final JSONArray contacts = httpHelper.getContacts(ContactsActivity.this, CONTACTS_URL);

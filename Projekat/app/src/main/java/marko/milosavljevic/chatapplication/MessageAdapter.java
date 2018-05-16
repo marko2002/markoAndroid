@@ -3,6 +3,7 @@ package marko.milosavljevic.chatapplication;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.Random;
 
 public class MessageAdapter extends BaseAdapter {
 
+    private static final String TAG = "MESSAGEADAPTER" ;
     private Context mContext;
     private ArrayList<MessageModel> mMessages;
 
@@ -87,6 +89,7 @@ public class MessageAdapter extends BaseAdapter {
 
         SharedPreferences preferences = mContext.getSharedPreferences(SHARED_PREFERENCES,mContext.MODE_PRIVATE);
         String senderID = preferences.getString("sender_id1",null);
+        Log.d(TAG, "getView: " + senderID + model.getmSenderID().toString());
 
         if(model.getmSenderID().toString().compareTo(senderID)==0) {
 

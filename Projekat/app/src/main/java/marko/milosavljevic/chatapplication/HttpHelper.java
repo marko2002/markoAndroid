@@ -104,8 +104,9 @@ public class HttpHelper {
             editor.putString("sessionId", sessionid);
             editor.apply();
         } else {
-            String error_message = urlConnection.getResponseMessage();
-            editor.putString("error_message_login", error_message);
+            String responseMsg = urlConnection.getResponseMessage();
+            String loginErr = Integer.toString(responseCode) + " : " + responseMsg;
+            editor.putString("loginErr", loginErr);
             editor.apply();
         }
 
