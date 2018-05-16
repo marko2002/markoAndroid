@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         email = findViewById(R.id.emailRegID);
         datePicker = findViewById(R.id.datePickerID);
 
-        db = new DbHelper(this);
+       // db = new DbHelper(this);
 
         httpHelper = new HttpHelper();
         handler = new Handler();

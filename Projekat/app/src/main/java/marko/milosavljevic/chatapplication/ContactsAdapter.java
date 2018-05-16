@@ -109,11 +109,12 @@ public class ContactsAdapter extends BaseAdapter {
 
         Model model = (Model) getItem(position);
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        holder.letter.setText(model.getmFirst_name().substring(0,1).toUpperCase());
-        String name = model.getmFirst_name() + " " + model.getmLast_name();
+        holder.letter.setText(model.getmUsername().substring(0,1).toUpperCase());
+        String name = model.getmUsername();
         holder.name.setText(name);
-        holder.image.setTag(model.getmId());
-
+      //  holder.image.setTag(model.getmId());
+        holder.image.setTag(model.getmUsername());
+        holder.letter.setBackgroundColor(randomColor());
         return convertView;
     }
 

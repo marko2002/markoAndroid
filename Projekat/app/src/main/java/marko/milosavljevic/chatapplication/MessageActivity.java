@@ -67,7 +67,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         senderID = preferences.getString("sender_id1",null);
         receiverID = preferences.getString("receiver_id1",null);
 
-        db = new DbHelper(this);
+       // db = new DbHelper(this);
 
         list.setAdapter(messageAdapter);
 
@@ -86,7 +86,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 if (bufferedMessages!=null) {
                     for (int i = 0; i < bufferedMessages.length; i++) {
                         if (bufferedMessages[i].getmMessageId().compareTo(message.getmMessageId()) == 0) {
-                            db.deleteMessage(message.getmMessageId());
+                          //  db.deleteMessage(message.getmMessageId());
                             Context context = getApplicationContext();
                             CharSequence text = getResources().getString(R.string.messageDeleted);
                             int duration = Toast.LENGTH_SHORT;
@@ -147,7 +147,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
             String messageForSend = message.getText().toString();
             MessageModel mess = new MessageModel(null,senderID,receiverID,messageForSend);
-            db.insertMessage(mess);
+            //db.insertMessage(mess);
             updateList();
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
@@ -160,7 +160,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
     public void updateList(){
 
-        bufferedMessages = db.readMessages(senderID,receiverID);
+       // bufferedMessages = db.readMessages(senderID,receiverID);
         messageAdapter.AddMessage1(bufferedMessages);
 
     }

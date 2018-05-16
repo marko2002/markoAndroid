@@ -174,6 +174,14 @@ public class HttpHelper {
         }
 
         int responseCode =  urlConnection.getResponseCode();
+        SharedPreferences.Editor editor = contacts_context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        if(responseCode!=SUCCESS) {
+            String responseMsg = urlConnection.getResponseMessage();
+            String logoutErr = Integer.toString(responseCode) + " : " + responseMsg;
+            editor.putString("logoutError", logoutErr);
+            editor.apply();
+        }
+
         urlConnection.disconnect();
         return (responseCode==SUCCESS);
     }

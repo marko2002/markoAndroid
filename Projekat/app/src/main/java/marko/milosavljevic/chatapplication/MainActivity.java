@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         login.setOnClickListener(this);
         register = findViewById(R.id.registerID);
         register.setOnClickListener(this);
-        db = new DbHelper(this);
+        //db = new DbHelper(this);
         context = this;
         httpHelper = new HttpHelper();
         handler = new Handler();

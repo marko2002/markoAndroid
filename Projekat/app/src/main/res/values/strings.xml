@@ -8,6 +8,7 @@
     <string name="LastName">Last Name</string>
     <string name="email">Email</string>
     <string name="gender">gender</string>
+    <string name="refresh">REFRESH</string>
     <string-array name="spinner">
         <item>Male</item>
         <item>Female</item>

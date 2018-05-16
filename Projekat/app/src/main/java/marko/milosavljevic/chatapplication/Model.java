@@ -8,19 +8,19 @@ import android.graphics.drawable.Drawable;
 
 public class Model {
 
-    private String mmId;
-    private String mmFirst_name;
-    private String mmLast_name;
+   // private String mmId;
+   // private String mmFirst_name;
+   // private String mmLast_name;
     private String mmUsername;
 
-    public Model(String mId, String mFirst_name, String mLast_name, String mUsername) {
-        this.mmId = mId;
-        this.mmFirst_name = mFirst_name;
-        this.mmLast_name = mLast_name;
+    public Model( String mUsername) {
+     //   this.mmId = mId;
+       // this.mmFirst_name = mFirst_name;
+        //this.mmLast_name = mLast_name;
         this.mmUsername = mUsername;
     }
 
-    public String getmId() {
+   /* public String getmId() {
         return mmId;
     }
 
@@ -31,7 +31,7 @@ public class Model {
     public String getmLast_name() {
         return mmLast_name;
     }
-
+*/
     public String getmUsername() {
         return mmUsername;
     }

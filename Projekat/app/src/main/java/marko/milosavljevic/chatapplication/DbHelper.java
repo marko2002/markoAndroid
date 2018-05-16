@@ -11,9 +11,9 @@ import android.view.Display;
  * Created by Win10 on 4/23/2018.
  */
 
-public class DbHelper extends SQLiteOpenHelper {
+public class DbHelper /*extends SQLiteOpenHelper */{}
 
-    public static final String DATABASE_NAME = "helperdatabase.db";
+   /* public static final String DATABASE_NAME = "helperdatabase.db";
     public static final int DATABASE_VERSION = 1;
 
 
@@ -61,10 +61,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public void ContactInsert (Model model ){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_CONTACT_ID,model.getmId());
+       // values.put(COLUMN_CONTACT_ID,model.getmId());
         values.put(COLUMN_USERNAME,model.getmUsername());
-        values.put(COLUMN_FIRST_NAME,model.getmFirst_name());
-        values.put(COLUMN_LAST_NAME,model.getmLast_name());
+       // values.put(COLUMN_FIRST_NAME,model.getmFirst_name());
+        ///values.put(COLUMN_LAST_NAME,model.getmLast_name());
 
         db.insert(TABLE_NAME_CONTACT,null,values);
         close();
@@ -150,4 +150,4 @@ public class DbHelper extends SQLiteOpenHelper {
         close();
     }
 
-}
+}*/

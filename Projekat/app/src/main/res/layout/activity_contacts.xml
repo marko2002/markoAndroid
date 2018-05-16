@@ -8,12 +8,23 @@
     tools:context="marko.milosavljevic.chatapplication.ContactsActivity">
 
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/refresh"
+        android:text="@string/refresh"
+        />
+
+
+    <Button
         android:id="@+id/LogOutID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="270dp"
         android:text="@string/logOut">
     </Button>
+
+
+
 
     <ListView
         android:layout_width="match_parent"
