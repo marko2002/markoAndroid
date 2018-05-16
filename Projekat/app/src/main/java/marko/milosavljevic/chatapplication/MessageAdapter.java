@@ -87,9 +87,16 @@ public class MessageAdapter extends BaseAdapter {
 
         SharedPreferences preferences = mContext.getSharedPreferences(SHARED_PREFERENCES,mContext.MODE_PRIVATE);
         String senderID = preferences.getString("sender_id1",null);
-        holder.message.setBackgroundColor(Color.parseColor("#ffffff"));
-        holder.message.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
 
+        if(model.getmSenderID().toString().compareTo(senderID)==0) {
+
+            holder.message.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.message.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
+        }else {
+            holder.message.setBackgroundColor(Color.parseColor("#b7b3b3"));
+            holder.message.setGravity(Gravity.CENTER_VERTICAL | Gravity.START);
+
+        }
 
 
         return convertView;

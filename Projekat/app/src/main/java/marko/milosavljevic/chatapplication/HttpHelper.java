@@ -221,6 +221,14 @@ public class HttpHelper {
         os.close();
 
         int responseCode =  urlConnection.getResponseCode();
+        SharedPreferences.Editor editor = message_context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
+        if(responseCode!=SUCCESS) {
+            String responseMsg = urlConnection.getResponseMessage();
+            String sendMsgErr = Integer.toString(responseCode) + " : " + responseMsg;
+            editor.putString("sendMsgErr", sendMsgErr);
+            editor.apply();
+        }
 
         urlConnection.disconnect();
 
@@ -261,8 +269,23 @@ public class HttpHelper {
 
         String jsonString = sb.toString();
         int responseCode =  urlConnection.getResponseCode();
+        String responseMsg = urlConnection.getResponseMessage();
+        SharedPreferences.Editor editor = contacts_context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
+
+
         urlConnection.disconnect();
-        return responseCode == SUCCESS ? new JSONArray(jsonString) : null;
+
+        if (responseCode == SUCCESS){
+            return new JSONArray(jsonString);
+        } else {
+            String getMessagesErr = Integer.toString(responseCode) + " : " + responseMsg;
+            editor.putString("getMessagesErr", getMessagesErr);
+            editor.apply();
+            return null;
+        }
+
+
     }
 }
 
