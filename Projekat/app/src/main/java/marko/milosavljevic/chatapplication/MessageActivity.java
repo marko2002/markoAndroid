@@ -29,9 +29,11 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
     private Button logOut;
     private Button send;
     private EditText message;
+    private Button refresh;
+
     private ListView list;
     final MessageAdapter messageAdapter = new MessageAdapter(this);
-   // private DbHelper db;
+    // private DbHelper db;
     private MessageModel[] bufferedMessages;
 
     private static final String SHARED_PREFERENCES = "SharedPreferences";
@@ -53,6 +55,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        refresh = findViewById(R.id.refresh_messages);
+        refresh.setOnClickListener(this);
 
         logOut = findViewById(R.id.messageActvLogOutBtnID);
         logOut.setOnClickListener(this);
@@ -85,13 +89,13 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         senderID = preferences.getString("sender_id1",null);
         receiverID = preferences.getString("receiver_id1",null);
 
-       // db = new DbHelper(this);
+        // db = new DbHelper(this);
         httpHelper = new HttpHelper();
         handler = new Handler();
         list.setAdapter(messageAdapter);
 
 
-       list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
            /* @Override
 
@@ -291,8 +295,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
     public void updateList(){
 
-       // bufferedMessages = db.readMessages(senderID,receiverID);
-       // messageAdapter.AddMessage1(bufferedMessages);
+        // bufferedMessages = db.readMessages(senderID,receiverID);
+        // messageAdapter.AddMessage1(bufferedMessages);
 
         new Thread(new Runnable() {
 
