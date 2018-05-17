@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -36,6 +37,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
     private static final String SHARED_PREFERENCES = "SharedPreferences";
     private String senderID;
     private String receiverID;
+
+    private static final String TAG = "MessageActivity";
 
     private static String BASE_URL = "http://18.205.194.168:80";
     private static String POST_MESSAGE_URL = BASE_URL + "/message";
@@ -88,9 +91,9 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         list.setAdapter(messageAdapter);
 
 
-    /*    list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+       list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-            @Override
+           /* @Override
 
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
 
@@ -114,8 +117,63 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 updateList();
                 return true;
+            }*/
+
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        JSONObject jsonObject = new JSONObject();
+                        MessageModel model  = (MessageModel) messageAdapter.getItem(position);
+                        String message_for_del = model.getmMessage();
+
+
+
+                        try {
+
+                            if(model.getmSenderID().toString().compareTo(senderID)==0) {
+                                jsonObject.put("sender", senderID);
+                                jsonObject.put("receiver", receiverID);
+                                jsonObject.put("data", message_for_del);
+                            }else{
+                                jsonObject.put("sender", receiverID);
+                                jsonObject.put("receiver", senderID);
+                                jsonObject.put("data", message_for_del);
+
+                            }
+                            Log.d(TAG, "run: " + jsonObject.toString());
+
+                            final boolean success = httpHelper.httpDelete(MessageActivity.this, POST_MESSAGE_URL, jsonObject);
+
+
+
+                            handler.post(new Runnable(){
+                                public void run() {
+                                    if (success) {
+
+                                        Toast.makeText(MessageActivity.this, getText(R.string.messageDeleted), Toast.LENGTH_SHORT).show();
+                                        message.getText().clear();
+                                        updateList();
+                                    } else {
+                                        SharedPreferences prefs = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+                                        String sendMsgErr = prefs.getString("sendMsgErr", null);
+                                        Toast.makeText(MessageActivity.this, sendMsgErr, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+                return true;
             }
-        });*/
+
+
+
+
+        });
 
 
         message.addTextChangedListener(new TextWatcher() {

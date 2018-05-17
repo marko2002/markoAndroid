@@ -43,4 +43,6 @@
 
     <string name="userRegistration">User registered!</string>
 
+    <string name="CONFLICT">There are some problems on login!</string>
+
 </resources>

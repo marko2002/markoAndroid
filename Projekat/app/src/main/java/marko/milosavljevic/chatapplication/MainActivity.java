@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 } else {
                                     SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
                                     String error_message = prefs.getString("loginErr", null);
-                                    Toast.makeText(MainActivity.this, R.string.message4,Toast.LENGTH_LONG).show();
+                                    Toast.makeText(MainActivity.this, R.string.CONFLICT,Toast.LENGTH_LONG).show();
                                  //   Toast.makeText(MainActivity.this, error_message, Toast.LENGTH_SHORT).show();
                                 }
                             }

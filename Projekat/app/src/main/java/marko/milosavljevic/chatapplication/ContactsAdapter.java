@@ -33,9 +33,13 @@ public class ContactsAdapter extends BaseAdapter {
 
     public void AddContacts(Model[] model) {
         mContacts.clear();
+        SharedPreferences preferences = mContext.getSharedPreferences(SHARED_PREFERENCES,Context.MODE_PRIVATE);
+        String loggedInUsername = preferences.getString("sender_id1",null);
         if(model!=null){
             for(Model modell : model){
-                mContacts.add(modell);
+                if(!modell.getmUsername().equals(loggedInUsername)) {
+                    mContacts.add(modell);
+                }
             }
         }
 
