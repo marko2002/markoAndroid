@@ -12,12 +12,14 @@ public class Model {
    // private String mmFirst_name;
    // private String mmLast_name;
     private String mmUsername;
+    private String mLastMessage;
 
-    public Model( String mUsername) {
+    public Model( String mUsername,String mmLastMessage) {
      //   this.mmId = mId;
        // this.mmFirst_name = mFirst_name;
         //this.mmLast_name = mLast_name;
         this.mmUsername = mUsername;
+        this.mLastMessage=mmLastMessage;
     }
 
    /* public String getmId() {

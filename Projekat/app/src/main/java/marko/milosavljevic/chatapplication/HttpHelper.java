@@ -26,6 +26,8 @@ public class HttpHelper {
     private static final int SUCCESS = 200;
     public static final String MY_PREFS_NAME = "MyPrefs";
     private static final String TAG = "HttpHelper";
+    private static String BASE_URL = "http://18.205.194.168:80";
+    private static String GET_NOTIFICATION_URL = BASE_URL + "/getfromservice";
 
     public boolean registerNewUser(Context context, String urlString, JSONObject jsonObject)throws IOException{
 
@@ -326,6 +328,58 @@ public class HttpHelper {
         Log.i("MSG" , urlConnection.getResponseMessage());
         urlConnection.disconnect();
         return (responseCode==SUCCESS);
+    }
+
+    public boolean getNotification(Context context) throws IOException, JSONException {
+        HttpURLConnection urlConnection = null;
+        java.net.URL url = new URL(GET_NOTIFICATION_URL);
+        urlConnection = (HttpURLConnection) url.openConnection();
+
+        SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String sessionId = prefs.getString("sessionId", null);
+
+
+        urlConnection.setRequestMethod("GET");
+        urlConnection.setRequestProperty("sessionid", sessionId);
+        urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        urlConnection.setRequestProperty("Accept","application/json");
+
+        try {
+            urlConnection.connect();
+        } catch (IOException e) {
+            return false;
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+
+        br.close();
+
+        Boolean response = Boolean.valueOf(sb.toString());
+
+        urlConnection.disconnect();
+        return (response);
+    }
+
+    public boolean checkServer() throws IOException {
+
+        HttpURLConnection urlConnection;
+        java.net.URL url = new URL(BASE_URL);
+        urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestProperty("Connection", "close");
+        urlConnection.setConnectTimeout(2000 /* milliseconds */ );
+
+        try {
+            urlConnection.connect();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
 

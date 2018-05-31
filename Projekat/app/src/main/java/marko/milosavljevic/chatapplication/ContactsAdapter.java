@@ -45,6 +45,14 @@ public class ContactsAdapter extends BaseAdapter {
 
         notifyDataSetChanged();
     }
+    public void addContact(Model oldContact, Model newContact) {
+
+        int index = mContacts.indexOf(oldContact);
+        mContacts.set(index, newContact);
+
+        notifyDataSetChanged();
+    }
+
 
     public void removeContact(int position){
         mContacts.remove(position);

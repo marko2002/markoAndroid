@@ -45,4 +45,7 @@
 
     <string name="CONFLICT">There are some problems on login!</string>
 
+    <string name="clickForMessage">Click for message!</string>
+    <string name="noNewMessages">There are no new messages!</string>
+    <string name="newMessages">There are new messages!</string>
 </resources>
