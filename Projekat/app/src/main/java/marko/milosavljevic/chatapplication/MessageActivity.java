@@ -50,6 +50,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
     private HttpHelper httpHelper;
     private Handler handler;
 
+    Crypto mCrypto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         // db = new DbHelper(this);
         httpHelper = new HttpHelper();
         handler = new Handler();
+
+        mCrypto = new Crypto();
         list.setAdapter(messageAdapter);
 
 
@@ -263,7 +267,9 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                     try {
                         jsonObject.put("receiver", receiverID);
                         jsonObject.put("data", message.getText().toString());
-
+                        String message1 = message.getText().toString();
+                        String cryptedMsg = mCrypto.crypt(message1);
+                        jsonObject.put("data", cryptedMsg);
                         final boolean success = httpHelper.sendMessage(MessageActivity.this, POST_MESSAGE_URL, jsonObject);
 
                         handler.post(new Runnable(){
@@ -314,7 +320,10 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                                 for (int i = 0; i < messages.length(); i++) {
                                     try {
                                         json_message = messages.getJSONObject(i);
-                                        bufferedMessages[i] = new MessageModel(json_message.getString("sender"),json_message.getString("data"));
+                                       // bufferedMessages[i] = new MessageModel(json_message.getString("sender"),json_message.getString("data"));
+                                        String message1 = json_message.getString("data");
+                                        String decryptedMsg = mCrypto.crypt(message1);
+                                        bufferedMessages[i] = new MessageModel(json_message.getString("sender"), decryptedMsg);
                                     } catch (JSONException e1) {
                                         e1.printStackTrace();
                                     }
